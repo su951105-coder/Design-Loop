@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Loop | 專業靈感與商業媒合平台</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #FDFDFD; scroll-behavior: smooth; }
+        .brand-gradient { background: linear-gradient(135deg, #1A237E 0%, #00897B 50%, #4ADE80 100%); }
+        .glass-nav { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        .modal-active { display: flex !important; animation: fadeIn 0.3s ease-out; }
+    </style>
+</head>
+<body class="text-slate-900">
+
+    <div id="splash" class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="w-24 h-24 rounded-[2rem] brand-gradient animate-pulse flex items-center justify-center shadow-2xl">
+            <div class="w-16 h-16 bg-white rounded-2xl"></div>
+        </div>
+        <p class="mt-8 text-slate-300 tracking-[0.4em] font-light uppercase">DESIGN LOOP</p>
+    </div>
+
+    <nav class="sticky top-0 z-[60] glass-nav border-b border-slate-100/50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3 cursor-pointer group" onclick="location.reload()">
+            <div class="w-10 h-10 rounded-xl brand-gradient group-hover:rotate-12 transition-transform shadow-lg"></div>
+            <h1 class="text-2xl font-black tracking-tighter text-slate-900">Design Loop</h1>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+            <button class="text-sm font-bold text-emerald-600" data-zh="探索" data-en="Explore">探索</button>
+            <button class="text-sm font-bold text-slate-400 hover:text-slate-600" data-zh="訊息" data-en="Chat">訊息</button>
+            <button onclick="toggleLang()" class="text-xs font-black text-slate-400 px-3 py-1 rounded-md" id="langBtn">EN</button>
+            <button id="authBtn" onclick="toggleModal(true)" class="brand-gradient text-white px-7 py-2.5 rounded-2xl text-sm font-bold shadow-lg shadow-emerald-500/20 hover:scale-105 transition-all">
+                <span data-zh="開始創造財富" data-en="Start Now">開始創造財富</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 p-6 lg:p-10">
+        <aside class="hidden lg:col-span-3 lg:block">
+            <div class="sticky top-28 bg-white rounded-[2rem] p-8 border border-slate-100 shadow-sm">
+                <p class="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-6" data-zh="贊助推廣" data-en="Sponsored">贊助推廣</p>
+                <div class="w-full aspect-[3/4] bg-slate-50 rounded-3xl border border-dashed border-slate-200 flex flex-col items-center justify-center p-4">
+                    <span class="text-2xl mb-2">💎</span>
+                    <p class="text-[10px] text-slate-400 italic">Premium Ad Space</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="lg:col-span-6 max-w-2xl mx-auto w-full space-y-12 pb-24">
+            <article class="bg-white rounded-[3rem] border border-slate-50 shadow-sm overflow-hidden animate-fade-in">
+                <div class="p-6 flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-full brand-gradient p-0.5"><div class="w-full h-full bg-white rounded-full"></div></div>
+                    <div><p class="font-black text-slate-800 text-sm">Design_Loop_Official</p></div>
+                </div>
+                <div class="aspect-square brand-gradient opacity-10 flex items-center justify-center">
+                    <span class="text-slate-300 font-black text-4xl italic">INSPIRATION</span>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-3" data-zh="啟動您的設計事業" data-en="Ignite Your Career">啟動您的設計事業</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-zh="在這裡，每一個靈感都能轉化為實際的收益。" data-en="Where every inspiration turns into actual profit.">在這裡，每一個靈感都能轉化為實際的收益。</p>
+                </div>
+            </article>
+        </div>
+
+        <aside class="hidden lg:col-span-3 lg:block">
+            <div class="sticky top-28 bg-slate-900 rounded-[2.5rem] p-10 text-white shadow-2xl">
+                <h4 class="text-emerald-400 text-xs font-black uppercase tracking-[0.2em] mb-8" data-zh="趨勢榜單" data-en="Trends">趨勢榜單</h4>
+                <div class="space-y-6 text-sm">
+                    <p class="font-bold hover:text-emerald-400 cursor-pointer">#Visual_Psychology</p>
+                    <p class="font-bold hover:text-emerald-400 cursor-pointer">#Canva_Connect</p>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <div id="registerModal" class="fixed inset-0 z-[200] bg-slate-900/40 backdrop-blur-md hidden items-center justify-center p-6">
+        <div class="bg-white w-full max-w-xl rounded-[4rem] p-12 shadow-2xl relative">
+            <button onclick="toggleModal(false)" class="absolute top-10 right-10 text-slate-300 text-2xl">✕</button>
+            <h2 class="text-4xl font-black text-slate-900 mb-8 tracking-tighter" data-zh="加入 Design Loop" data-en="Join Design Loop">加入 Design Loop</h2>
+            
+            <div class="space-y-4 mb-6">
+                <input type="email" id="emailInput" placeholder="Email" class="w-full p-5 bg-slate-50 rounded-2xl outline-none ring-2 ring-slate-100 focus:ring-emerald-400 transition-all">
+                <input type="password" id="passInput" placeholder="Password (6+ chars)" class="w-full p-5 bg-slate-50 rounded-2xl outline-none ring-2 ring-slate-100 focus:ring-emerald-400 transition-all">
+            </div>
+            
+            <button id="finalRegBtn" class="w-full py-5 rounded-[2rem] text-white font-black text-lg brand-gradient shadow-2xl active:scale-95 transition-all" data-zh="立即註冊" data-en="Register Now">立即註冊</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // 你的專屬金鑰已自動帶入
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3AB_6ntyieC8pYAG6nNg7d7jqsiJwnAs",
+            authDomain: "design-loop.firebaseapp.com",
+            projectId: "design-loop",
+            storageBucket: "design-loop.firebasestorage.app",
+            messagingSenderId: "743691233888",
+            appId: "1:743691233888:web:48c777ee7bacfa6e7af105",
+            measurementId: "G-ZL9H5WF7B3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('authBtn').innerHTML = `<span class="px-4 text-xs">Hi, ${user.email.split('@')[0]}</span>`;
+                setTimeout(() => toggleModal(false), 500);
+            }
+        });
+
+        document.getElementById('finalRegBtn').addEventListener('click', async () => {
+            const email = document.getElementById('emailInput').value;
+            const pass = document.getElementById('passInput').value;
+
+            if(!email || pass.length < 6) {
+                alert("請輸入正確的 Email 與 6 位以上密碼");
+                return;
+            }
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+                await addDoc(collection(db, "users"), {
+                    uid: userCredential.user.uid,
+                    email: email,
+                    createdAt: new Date()
+                });
+                alert("註冊成功！歡迎來到 Design Loop");
+            } catch (error) {
+                alert("註冊失敗：" + error.message);
+            }
+        });
+    </script>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash');
+                splash.style.opacity = '0';
+                setTimeout(() => splash.style.display = 'none', 700);
+            }, 2000);
+        });
+
+        let currentLang = 'zh';
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            document.getElementById('langBtn').innerText = currentLang === 'zh' ? 'EN' : '繁中';
+            document.querySelectorAll('[data-zh]').forEach(el => {
+                el.innerText = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        function toggleModal(show) {
+            const modal = document.getElementById('registerModal');
+            show ? modal.classList.add('modal-active') : modal.classList.remove('modal-active');
+        }
+    </script>
+</body>
+</html>
